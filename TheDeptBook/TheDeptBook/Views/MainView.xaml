@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="TheDeptBook.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TheDeptBook"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600">
+    <!--<UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:MainViewModel}">
+        </DataTemplate>
+        <DataTemplate x:Key="lbItemsTemplate">
+            <StackPanel FlowDirection="LeftToRight"  Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                <TextBlock Text=" \ "></TextBlock>
+                <TextBlock Text="{Binding Path=TotalCredit}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>-->
+<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="62*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Label HorizontalAlignment="Center">Deptors</Label>
+            <ListBox MinHeight="300" Margin="10" Width="400" Name="ListDebtors" ItemsSource="{Binding Debtors}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="DarkGray" Background="LightGray" BorderThickness="2">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Margin="5,5,90,5" Text="{Binding DebtorName}" />
+                                <TextBlock Margin="90,5,5,5" Text="{Binding TotalCredit}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
