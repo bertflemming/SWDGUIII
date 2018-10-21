@@ -23,8 +23,15 @@
             <ColumnDefinition Width="62*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Label HorizontalAlignment="Center">Deptors</Label>
-            <ListBox MinHeight="300" Margin="10" Width="400" Name="ListDebtors" ItemsSource="{Binding Debtors}">
+            <StackPanel Margin="50,0,50,0">
+                <Label HorizontalAlignment="Center">Deptors</Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label Margin="20,0,0,0">Name:</Label>
+                    <Label Margin="180,0,0,0">Amount:</Label>
+                </StackPanel>
+            </StackPanel>
+
+            <ListBox MinHeight="300" Margin="10" Width="300" Name="ListDebtors" ItemsSource="{Binding Debtors}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="DarkGray" Background="LightGray" BorderThickness="2">

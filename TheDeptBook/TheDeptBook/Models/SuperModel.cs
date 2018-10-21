@@ -46,7 +46,8 @@ namespace TheDeptBook
             return 0;
         }
 
-        public ObservableCollection<Transaction> SearchName(string findName)
+
+        public DebtorModel GetDebtorModel(string findName)
         {
             DebtorModel tempDebtor = new DebtorModel();
             tempDebtor.DebtorName = findName;
@@ -54,10 +55,11 @@ namespace TheDeptBook
             {
                 if (debtorModel.DebtorName == tempDebtor.DebtorName)
                 {
-                    return debtorModel.Debits;
+                    return debtorModel;
                 }
             }
-            return tempDebtor.Debits;
+            return tempDebtor;
+
         }
 
         public void AddDebtor(string name, double initAmount)
@@ -80,6 +82,15 @@ namespace TheDeptBook
 
     public class Transaction
     {
+        public Transaction()
+        {
+
+        }
+        public Transaction(double amount, DateTime date)
+        {
+            Amount = amount;
+            Date = date;
+        }
         public double Amount { get; set; }
         public DateTime Date { get; set; }
     }
@@ -92,6 +103,9 @@ namespace TheDeptBook
         private string _name;
         private double _totalCredit;
 
+        public DebtorModel()
+        {
+        }
 
         public ObservableCollection<Transaction> Debits
         {
@@ -127,10 +141,6 @@ namespace TheDeptBook
             }
         }
 
-        public DebtorModel()
-        {
-        }
-
         public DebtorModel(string name, double totalCredit)
         {
             DebtorName = name;
@@ -148,7 +158,7 @@ namespace TheDeptBook
             tempTransaction.Date = date;
             tempTransaction.Amount = amount;
             _debits.Add(tempTransaction);
-            TotalCredit = +amount;
+            TotalCredit += amount;
         }
     }
 }

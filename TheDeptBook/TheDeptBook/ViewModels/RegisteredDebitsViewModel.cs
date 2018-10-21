@@ -17,6 +17,10 @@ namespace TheDeptBook
         public RegisteredDebitsViewModel(SuperModel superModel)
         {
             _superModel = superModel;
+            _transactions = new ObservableCollection<Transaction>();
+            Transactions.Add(new Transaction(210, DateTime.Now));
+            Transactions.Add(new Transaction(2190, DateTime.Now));
+            Transactions.Add(new Transaction(21990, DateTime.Now));
         }
 
         #region Properties
@@ -82,10 +86,31 @@ namespace TheDeptBook
 
         private void SearchDebtor()
         {
-            Transactions = _superModel.SearchName(SearchName);
+            _transactions.Clear();
+            foreach (var trans in _superModel.GetDebtorModel(SearchName).Debits)
+            {
+                _transactions.Add(trans);
+            }
         }
 
         private bool SearchDebtorCanExecute()
+        {
+            return true;
+        }
+
+        ICommand _addValueCommand;
+        public ICommand AddValueCommand
+        {
+            get { return _addValueCommand ?? (_addValueCommand = new RelayCommand(AddValue, AddValueCanExecute)); }
+        }
+
+        private void AddValue()
+        {
+            _superModel.GetDebtorModel(SearchName).AddTransaction(DateTime.Now, Value);
+            SearchDebtor();
+        }
+
+        private bool AddValueCanExecute()
         {
             return true;
         }

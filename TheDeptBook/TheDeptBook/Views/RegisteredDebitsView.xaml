@@ -15,18 +15,25 @@
             <ColumnDefinition Width="222*"/>
             <ColumnDefinition Width="223*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="112,19,112.4,19.8"></TextBlock>
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Text="{Binding Path=SearchName}"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="20,0,0,0">Amount:</Label>
+                <Label Margin="180, 0,0,0">Date:</Label>
+            </StackPanel>
+        </StackPanel>
         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Margin="9.6,14,10,14.8">
             <Label>Name:</Label>
-            <TextBox MinWidth="100" Margin="10,0,10,0" Text="{Binding Path=DebtorName}"></TextBox>
-            <Button MaxHeight="20" Command="{Binding SearchDebtorCommand}">Search</Button>
+            <TextBox Name="tbSearchName" MinWidth="100" Margin="10,0,10,0" Text="{Binding Path=SearchName}"></TextBox>
+            <Button Name="SearchButton" MaxHeight="20" Command="{Binding SearchDebtorCommand}">Search</Button>
         </StackPanel>
-        <ListBox Margin="10" Grid.Row="1" ItemsSource="{Binding Transactions}">
+        <ListBox Name="DebitsList" Margin="10" Grid.Row="1" ItemsSource="{Binding Transactions}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="DarkGray" Background="LightGray" BorderThickness="2">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Margin="5,5,90,5" Text="{Binding Amount}" />
+                            <TextBlock Margin="5,5,70,5" Text="{Binding Amount}" />
+                            <TextBlock Margin="70,5,5,5" Text="{Binding Date}" />
                         </StackPanel>
                     </Border>
                 </DataTemplate>
@@ -35,9 +42,9 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <StackPanel Orientation="Horizontal">
                 <Label Margin="10,10,0,10">Value:</Label>
-                <TextBox MinWidth="120" Margin="10"></TextBox>
+                <TextBox Text="{Binding Path=Value}" MinWidth="120" Margin="10"></TextBox>
             </StackPanel>
-            <Button Margin="40, 10, 40, 0">Add Value</Button>
+            <Button Margin="40, 10, 40, 0" Command="{Binding AddValueCommand}">Add Value</Button>
         </StackPanel>
     </Grid>
 </UserControl>
